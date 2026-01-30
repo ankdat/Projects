@@ -25,8 +25,8 @@ def save_raw_data(df: pd.DataFrame, ticker: str):
 
 if __name__ == "__main__":
     ticker = "AAPL"          # we start with ONE stock
-    start_date = "2023-01-01"
-    end_date = "2025-01-01"
+    start_date = "2024-01-01"
+    end_date = "2026-01-15"
 
     df = fetch_stock_data(ticker, start_date, end_date)
     save_raw_data(df, ticker)
