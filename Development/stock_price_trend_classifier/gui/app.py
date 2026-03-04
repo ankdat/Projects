@@ -36,11 +36,9 @@ st.title("📈 Tomorrow’s Stock Close Predictor")
 
 st.write(
     """
-This app predicts **whether tomorrow’s closing price**
-is likely to be **higher or lower than today’s**,  
+This app predicts whether tomorrow’s closing price
+is likely to be higher or lower than today’s,  
 using historical price data and a trained ML model.
-
-It also displays a brief **company summary** for context.
 
 ⚠️ Predictions are **probabilistic**, not guaranteed.
 """
@@ -150,7 +148,7 @@ if st.button("Analyze Stock"):
             else:
                 direction = "NEUTRAL ⚖️"
 
-            st.subheader("🔮 Tomorrow’s Prediction")
+            st.subheader("Tomorrow’s Prediction")
             st.success(f"**Direction:** {direction}")
 
             col1, col2 = st.columns(2)
