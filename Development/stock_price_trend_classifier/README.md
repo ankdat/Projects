@@ -1,183 +1,211 @@
-📈 Stock Price Direction Prediction (Machine Learning + Streamlit)
+# 📈 Next-Day Stock Movement Classification
 
-Predict the direction of tomorrow’s stock closing price (📈 UP / 📉 DOWN / ⚖️ NEUTRAL) using historical price data, technical indicators, and machine learning — with a live Streamlit web app.
+A machine learning project that predicts whether a stock's **next-day closing price will move UP or DOWN** using historical market data and technical indicators.
 
-⚠️ This project focuses on directional prediction, not exact price forecasting.
+The project compares **Logistic Regression** and **Random Forest** classifiers and deploys the trained model through an interactive **Streamlit web application**.
 
-🚀 Live Demo (Local)
-streamlit run gui/app.py
+This project was developed as part of the **M.Sc. Data Science program at Symbiosis School for Online and Digital Learning**.
+
+---
+
+# 🚀 Project Overview
+
+Financial markets are noisy, dynamic, and difficult to predict. Instead of forecasting exact prices, this project formulates stock prediction as a **binary classification problem**:
+
+Will tomorrow's closing price be higher or lower than today's?
+
+The system:
+
+1. Fetches historical stock data from **Yahoo Finance**
+2. Computes **technical indicators**
+3. Trains machine learning models
+4. Evaluates performance using classification metrics
+5. Deploys predictions through a **Streamlit GUI**
+
+---
+
+# 📊 Models Implemented
+
+Two machine learning models are implemented and compared:
+
+### Logistic Regression
+- Linear classifier
+- Uses **feature scaling**
+- Produces probabilistic predictions
+- Performed best in experiments
+
+### Random Forest
+- Ensemble tree-based model
+- Captures nonlinear feature interactions
+- Uses bagging and feature randomness
+
+---
+
+# 📉 Model Performance
+
+| Model | Accuracy | Macro F1 Score |
+|------|------|------|
+| Logistic Regression | **54.55%** | **0.53** |
+| Random Forest | 41.41% | 0.38 |
+
+Results show that **Logistic Regression generalizes better** for this dataset and feature set.
+
+---
+
+# 🧠 Features Used
+
+Technical indicators derived from historical price data:
+
+- **RSI (Relative Strength Index)**
+- **MA10 (10-day Moving Average)**
+- **MA20 (20-day Moving Average)**
+- **Rolling Volatility**
+
+These indicators capture:
+
+- momentum
+- short-term trends
+- market uncertainty
+
+---
+
+# 🖥️ Streamlit Application
+
+The project includes a **Streamlit GUI** that allows users to:
+
+- Enter any stock ticker (e.g. `AAPL`, `MSFT`, `RELIANCE.NS`)
+- Retrieve company information
+- Compute technical indicators
+- Generate next-day movement prediction
+- Display probability scores
+
+Example output:
+Prediction: UP 📈
+Probability UP: 61%
+Probability DOWN: 39%
 
 
-The app allows you to:
+---
 
-enter any stock ticker (e.g. AAPL, MSFT, RELIANCE.NS)
+# 🗂 Project Structure
+stock_price_trend_classifier
 
-view company information
+data/
+raw/
 
-see tomorrow’s predicted direction
+models/
+logistic_model.pkl
+scaler.pkl
 
-understand prediction confidence via probabilities
+src/
+data_fetch.py
+features.py
+model.py
+train_pipeline.py
 
-🧠 What This Project Does
+gui/
+app.py
 
-Uses historical price data only
+README.md
+requirements.txt
 
-Engineers technical indicators:
 
-RSI (14)
+---
 
-Moving Averages (10, 20)
+# ⚙️ Installation
 
-Rolling Volatility (10)
+Clone the repository:
 
-Trains a Logistic Regression classifier
+```bash
+git clone https://github.com/ankdat/stock_price_trend_classifier.git
+cd stock_price_trend_classifier
 
-Predicts whether tomorrow’s close will be higher or lower than today’s
+Create virtual environment:
 
-Displays:
-
-direction (UP / DOWN / NEUTRAL)
-
-probabilities
-
-confidence meter
-
-company summary
-
-🎯 Why Directional Prediction?
-
-Predicting exact stock prices is unrealistic in short horizons.
-
-Instead, this project answers a more meaningful question:
-
-Is tomorrow more likely to close higher or lower than today?
-
-This formulation:
-
-avoids false precision
-
-aligns with academic financial ML practice
-
-allows probabilistic interpretation
-
-🖥️ Streamlit App Features
-
-🔎 Stock ticker input
-
-🏢 Company overview (sector, industry, country, description)
-
-🔮 Next-day direction prediction
-
-📊 Probability of UP vs DOWN
-
-📈 Confidence meter
-
-⚖️ NEUTRAL output when confidence is low
-
-📂 Project Structure
-stock_price_trend_classifier/
-│
-├── data/
-│   ├── raw/
-│   └── processed/
-│
-├── notebooks/
-│   └── 02_feature_engineering.ipynb
-│
-├── src/
-│   ├── features.py
-│   └── model.py
-│
-├── models/
-│   ├── logistic_model.pkl
-│   └── scaler.pkl
-│
-├── gui/
-│   └── app.py
-│
-├── requirements.txt
-└── README.md
-
-⚙️ Installation & Setup
-1️⃣ Clone the repository
-git clone https://github.com/your-username/stock-price-trend-classifier.git
-cd stock-price-trend-classifier
-
-2️⃣ Create virtual environment
 python -m venv env
-source env/bin/activate   # macOS / Linux
+source env/bin/activate
 
-3️⃣ Install dependencies
+Install dependencies:
+
 pip install -r requirements.txt
+▶️ Train the Model
 
-4️⃣ Run the app
+Run the training pipeline:
+
+python src/train_pipeline.py
+
+This will:
+
+fetch historical stock data
+
+generate features
+
+train models
+
+save trained model files
+
+▶️ Run the Streamlit App
 streamlit run gui/app.py
 
-📊 Model Details
+The web interface will open in your browser.
 
-Algorithm: Logistic Regression
+📦 Data Source
 
-Problem Type: Binary Classification
+Historical stock market data is retrieved using:
 
-Target Definition:
+yfinance API
 
-1 → Close(t+1) > Close(t)
-0 → otherwise
+Data provided by Yahoo Finance
 
+📚 Technologies Used
 
-Evaluation: Time-aware train/test split (no shuffling)
+Python
 
-Typical Accuracy: ~55% (realistic for daily stock direction)
+pandas
 
-⚠️ Limitations (Important)
+NumPy
 
-No exact price prediction
+scikit-learn
 
-No trading strategy
+yfinance
 
-No transaction costs
+Streamlit
 
-No volume or fundamental data
+matplotlib
 
-Short-horizon predictions are inherently noisy
-
-This is expected and discussed openly in the project.
-
-🧪 Key Takeaways
-
-Financial markets have weak predictive signals
-
-Correct methodology matters more than high accuracy
-
-Simpler models can outperform complex ones
-
-Probabilities are more honest than hard predictions
-
-🔮 Future Improvements
-
-Add volume-based indicators
-
-Include macroeconomic data
-
-Extend horizon (weekly prediction)
-
-Backtesting with trading rules
-
-Probability calibration
+seaborn
 
 🎓 Academic Context
 
-Developed as an MSc-level Machine Learning / Data Science project, with emphasis on:
+This project was developed as part of the M.Sc. Data Science program at Symbiosis School for Online and Digital Learning.
 
-data leakage prevention
+Project Title:
 
-realistic modeling assumptions
+Next-Day Stock Movement Classification Using Logistic Regression and Random Forest
 
-reproducibility
+Author:
+Ankan Datta
 
-interpretability
+⚠️ Disclaimer
 
-📜 Disclaimer
+This project is intended for educational and research purposes only.
 
-This project is for educational purposes only.
-It does not constitute financial advice or a trading system.
+It does not constitute financial advice. Stock market predictions are inherently uncertain.
+
+📬 Future Improvements
+
+Potential extensions include:
+
+XGBoost / LightGBM models
+
+Walk-forward validation
+
+Multi-stock training
+
+Sentiment analysis integration
+
+Deep learning models (LSTM / GRU)
+
+⭐ If you found this project useful
+
+Consider giving the repository a star ⭐.
